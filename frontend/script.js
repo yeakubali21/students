@@ -1,7 +1,8 @@
 // =========================
 // API URL (Change this)
 // =========================
-const API_URL = " ";
+//const API_URL = "https://students-p.onrender.com";
+const API_URL = window.location.origin;
 const STUDENTS_URL = `${API_URL}/students/`;
 
 // =========================
