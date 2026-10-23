@@ -1,6 +1,6 @@
 from student_repository import StudentRepository
 from sqlalchemy.orm import Session
-from schema import StudentUpdateRequest, StudentCreateRequet
+from schema import StudentCreateRequest, StudentUpdateRequest
 from fastapi import HTTPException
 from student_model import Student
 
@@ -21,9 +21,12 @@ class StudentService:
         student.first_name= update_student.first_name
         student.last_name = update_student.last_name
         student.department = update_student.department
+        student.roll = update_student.roll
+        student.session = update_student.session
+
         return self.repository.update_student(db, student)
 
-    def create_student(self, db: Session, student_payload : StudentCreateRequet):
+    def create_student(self, db: Session, student_payload: StudentCreateRequest):
         student = Student(first_name = student_payload.first_name,
                             last_name = student_payload.last_name,
                             roll = student_payload.roll, 
@@ -36,5 +39,3 @@ class StudentService:
 
     def delete_student(self, roll:str, db:Session):
         self.repository.delete_student(db, roll)
-
-

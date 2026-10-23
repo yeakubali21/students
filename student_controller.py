@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends, status
 from database import get_db
 from student_service import StudentService
-from schema import StudentResponse, StudentUpdateRequest, StudentCreateRequet
+from schema import StudentCreateRequest, StudentUpdateRequest
 from sqlalchemy.orm import Session
 
 
@@ -18,7 +18,7 @@ def get_student_by_roll(roll: str, db:Session = Depends(get_db)):
     return service.get_student_by_roll(db, roll)
 
 @routers.post("/create", status_code= status.HTTP_201_CREATED)
-def create_student(student_payload : StudentCreateRequet, db:Session = Depends(get_db)):
+def create_student(student_payload : StudentCreateRequest, db:Session = Depends(get_db)):
      service = StudentService()
      return service.create_student(db, student_payload)
 
@@ -31,7 +31,6 @@ def update_student(roll: str, update_student: StudentUpdateRequest, db:Session =
 def delete_student(roll: str, db: Session = Depends(get_db)):
      service = StudentService()
      service.delete_student(roll, db)
-
 
 
 

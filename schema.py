@@ -1,23 +1,29 @@
-from pydantic import BaseModel
+
+from pydantic import BaseModel, ConfigDict
 
 
-class BaseStudent(BaseModel):
+class StudentCreateRequest(BaseModel):
     first_name: str
     last_name: str
     roll: str
     session: int
     department: str
 
-class StudentCreateRequet(BaseStudent):
-    pass
 
 class StudentUpdateRequest(BaseModel):
     first_name: str
     last_name: str
+    roll: str
+    session: int
     department: str
 
-class StudentResponse(BaseStudent):
-    id : int
 
-    class Config:
-        orm_mode = True 
+class StudentResponse(BaseModel):
+    id: int
+    first_name: str
+    last_name: str
+    roll: str
+    session: int
+    department: str
+
+    model_config = ConfigDict(from_attributes=True)

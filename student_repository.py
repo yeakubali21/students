@@ -14,7 +14,7 @@ class StudentRepository:
         return db.query(Student).filter(Student.roll == roll).first()
 
     def update_student(self, db: Session, student: Student):
-        db.merge(student)
+        #db.merge(student)
         db.commit()
         db.refresh(student)
         return student
